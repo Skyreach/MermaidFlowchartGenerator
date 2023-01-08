@@ -22,12 +22,13 @@ namespace Mermaid_Diagram_Generator
         [InlineData("Test Source City -- Test Path --> Test Destination City")]
         [InlineData("Test Source City -. Test Hidden Path .-> Test Destination City")]
         [InlineData("Test Source City -. Test Hidden Path .-> Test Destination City; Test City")]
+        [InlineData("Test Source City -. Test Hidden Path .-> Test Destination City; Test Source City")]
         public void Init(string inbound)
         {
             var inputSplits = inbound.Split(";");
             var edgeSeparators = new List<string>() { "--", "-->", "-.", ".->" };
             var cityLabels = inputSplits.Where(input => !edgeSeparators.Any(input.Contains)).ToList();
-            // var knownRoutes = inputSplits.Where(input => edgeSeparators.Any(input.Contains)).ToList();
+            var knownRoutes = inputSplits.Where(input => edgeSeparators.Any(input.Contains)).ToList();
 
             // create a hashset of all the cities
             var cities = new HashSet<string>();
@@ -76,10 +77,43 @@ namespace Mermaid_Diagram_Generator
             var routes = PopulateRoutes2(
                 nodeLabels,
                 edgeLabels);
+            
+            routes.AddRange(knownRoutes.Select(RouteFromString));
 
             var chart = GenerateChart(routes);
 
             _testOutputHelper.WriteLine(chart);
+        }
+
+        
+        private Route RouteFromString(string route)
+        {
+            var separatorStartArray = new[] { "--", "-.", };
+            var separatorEndArray = new[] { "-->", ".->" };
+            var separatorPathArray = new[] { "--", "-.", "-->", ".->" };
+            var sourceCity = route.Split(separatorStartArray, StringSplitOptions.RemoveEmptyEntries)[0].Trim();
+            var path = route.Split(separatorPathArray, StringSplitOptions.RemoveEmptyEntries)[1].Trim();
+            var destinationCity = route.Split(separatorEndArray, StringSplitOptions.RemoveEmptyEntries)[1].Trim();
+            
+            // Ensure that the sourceCity and destinationCity exist inside Nodes, and add new nodes if they don't.
+            if (!Nodes.ContainsKey(sourceCity))
+            {
+                Nodes.Add(sourceCity, new Node(sourceCity, 0));
+            }
+            if (!Nodes.ContainsKey(destinationCity))
+            {
+                Nodes.Add(destinationCity, new Node(destinationCity, 0));
+            }
+
+            return new Route
+            {
+                Source = sourceCity,
+                Destination = destinationCity,
+                Via = path,
+                Style = route.Contains("-.")
+                    ? "dotted"
+                    : null,
+            };
         }
 
         private string GenerateChart(List<Route> routes)
@@ -89,7 +123,7 @@ namespace Mermaid_Diagram_Generator
             {
                 var srcHash = HashString(route.Source);
                 var destHash = HashString(route.Destination);
-                var sourceWeightStyled = Nodes[route.Source].Weight switch
+                var sourceWeightStyled = Nodes[route.Source].Usage switch
                 {
                     1 => $"({route.Source})",
                     2 => $"([{route.Source}])",
@@ -97,7 +131,7 @@ namespace Mermaid_Diagram_Generator
                     4 => $"(({route.Source}))",
                     _ => $"((({route.Source})))",
                 };
-                var destWeightStyled = Nodes[route.Destination].Weight switch
+                var destWeightStyled = Nodes[route.Destination].Usage switch
                 {
                     1 => $"({route.Destination})",
                     2 => $"([{route.Destination}])",
@@ -219,6 +253,8 @@ namespace Mermaid_Diagram_Generator
             {
                 Nodes[cityName].Weight++;
             }
+
+            Nodes[cityName].Usage++;
         }
 
         private Route FindRoute(List<Route> routes, uint weight)
@@ -290,8 +326,11 @@ namespace Mermaid_Diagram_Generator
             {
                 Label = label;
                 Weight = 1;
+                Usage = 1;
                 Resistance = resistance;
             }
+
+            public uint Usage { get; set; }
 
             public string Label { get; set; }
             public uint Weight { get; set; } = 1;
