@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mermaid Diagram Generator", "Mermaid Diagram Generator\Mermaid Diagram Generator.csproj", "{63773D79-793C-4BD2-9014-3C2ECA8CE363}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63773D79-793C-4BD2-9014-3C2ECA8CE363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63773D79-793C-4BD2-9014-3C2ECA8CE363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63773D79-793C-4BD2-9014-3C2ECA8CE363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63773D79-793C-4BD2-9014-3C2ECA8CE363}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,179 @@
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+[Bb]in/
+[Oo]bj/
+TestResults/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# NuGet Packages
+*.nupkg
+# NuGet Symbol Packages
+*.snupkg
+# The packages folder can be ignored because of Package Restore
+**/[Pp]ackages/*
+# except build/, which is used as an MSBuild target.
+!**/[Pp]ackages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/[Pp]ackages/repositories.config
+# NuGet v3's project.json files produces more ignorable files
+*.nuget.props
+*.nuget.targets
+
+# IDE-Specific files (Rider, Intellij, VSCode)
+*.idea
+*/**/.vs
+.vscode
+
+# VS Code files for those working on multiple tools
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+
+#python
+__pycache__
+.pytest_cache
+**/python/**/dist
+**/python/**/build
+*.egg-info
+venv/
+
+# macOS
+.DS_Store
+
+
+infrastructure/terraform/terraform.tfstate.backup
+
+infrastructure/kubectl*
+
+infrastructure/terraform/terraform.tfstate
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Exclude all .tfvars files, which are likely to contain sentitive data, such as
+# password, private keys, and other secrets. These should not be part of version 
+# control as they are data points which are potentially sensitive and subject 
+# to change depending on the environment.
+#
+*.tfvars
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include override files you do wish to add to version control using negated pattern
+#
+# !example_override.tf
+
+# Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
+# example: *tfplan*
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+infrastructure/terraform/.terraform.lock.hcl
+infrastructure/terraform/.terraform/providers/*
+infrastructure/terraform/mediaposts/tfplan
+
+services/**/healthz
+protoc-*
+protoc/
+
+# Automatic Documents
+summary_documents.xml
+
+## 
+tools/csharp/*
+
+.keys/
+*.jwk
+
+# Javascript
+node_modules/
+tests/**/report
+
+# Frontend
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/*.bolt
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+TestResults/9ca3ac43-8551-49c7-9514-41b4ba1995f3/jzhou_JIAN-LAPTOP 2022-07-22 13_26_44.coverage
+courgette.log
+tests/**/report
+
+# Frontend
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/appsettings.[Ll]ocal.json
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+TestResults/9ca3ac43-8551-49c7-9514-41b4ba1995f3/jzhou_JIAN-LAPTOP 2022-07-22 13_26_44.coverage
